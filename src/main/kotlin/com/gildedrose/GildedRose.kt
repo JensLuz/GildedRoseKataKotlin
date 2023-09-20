@@ -8,7 +8,7 @@ class GildedRose(var items: List<Item>) {
         val conjured = arrayOf("Conjured Mana Cake")
         items.forEach {
             processQuality(it, legendary, increasingQualityItems, conjured)
-            processSellIn(it, legendary, increasingQualityItems, conjured)
+            processSellIn(it, legendary, increasingQualityItems)
         }
     }
 
@@ -16,16 +16,16 @@ class GildedRose(var items: List<Item>) {
     private fun processQuality(item: Item, legendary: Array<String>, increasingQualityItems: Array<String>, conjured: Array<String>) {
         // Quality rules for standard items
         if (item.name !in increasingQualityItems) {
-            degradeStandardItemsQuality(item)
+            degradeStandardItemQuality(item, legendary, conjured)
         // quality rules for quality increasing items
         } else if (item.name in increasingQualityItems) {
-            increaseSpecialItemsQuality(item)
+            increaseSpecialItemQuality(item)
         }
         qualityMinMaxCheck(item, legendary)
     }
 
     // Process sellIn related rules
-    private fun processSellIn(item: Item, legendary: Array<String>, increasingQualityItems: Array<String>, conjured: Array<String>) {
+    private fun processSellIn(item: Item, legendary: Array<String>, increasingQualityItems: Array<String>) {
         // Standard sellIn degradation of non-legendary items
         if (item.name !in legendary) item.sellIn -= 1
         // Below zero degradation
@@ -45,7 +45,7 @@ class GildedRose(var items: List<Item>) {
         if (item.quality > 50 && item.name !in legendary) item.quality = 50
     }
 
-    private fun degradeStandardItemsQuality(item: Item) {
+    private fun degradeStandardItemQuality(item: Item, legendary: Array<String>, conjured: Array<String>) {
         if (item.quality > 0) {
             // Standard quality degradation of non-legendary items
             if (item.name !in legendary) item.quality -= 1
@@ -53,7 +53,7 @@ class GildedRose(var items: List<Item>) {
             if (item.name in conjured) item.quality -= 1
         }
     }
-    private fun increaseSpecialItemsQuality(item: Item) {
+    private fun increaseSpecialItemQuality(item: Item) {
         item.quality = item.quality + 1
         // Backstage pass item has special quality increase rules
         if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
