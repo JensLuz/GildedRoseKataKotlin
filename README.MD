@@ -1,5 +1,4 @@
 Author: Jens Luz
-Email: jens.luz@gmail.com
 
 This project contains the Gilded Rose Kata in Kotlin.
 The following steps were executed to refactor the project:
