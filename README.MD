@@ -10,4 +10,4 @@ The following steps were executed to refactor the project:
 - Included comments in the code
 
 Build the project via:
-$ gradlew clean build
+$ gradlew build
