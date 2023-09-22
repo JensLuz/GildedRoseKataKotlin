@@ -8,3 +8,6 @@ The following steps were executed to refactor the project:
 - Reduced curly bracket overhead of the if's by one-liners
 - Reduced counter overhead by using the short notations += and -=
 - Included comments in the code
+
+Build the project via:
+$ gradlew clean build
